@@ -39,6 +39,42 @@ This project implements a backend commerce service that handles:
 
 ---
 
+## Why I Built This
+
+### The Spark
+
+While preparing for backend engineering interviews, I kept encountering questions about payment systems, idempotency, and handling distributed failures. I realized that while I understood these concepts theoretically, I had never actually implemented them from scratch.
+
+Then I read about how Stripe processes billions in payments using idempotency keys, and how a single duplicate charge can cost companies both money and customer trust. That's when it clicked: I needed to build something that solves real problems, not just another CRUD app.
+
+### The Challenge I Set For Myself
+
+I gave myself a constraint: **build it in under 6 hours**, just like a take-home assignment. This forced me to:
+- Focus on what matters (correctness over features)
+- Make deliberate tradeoffs (documented in Design Tradeoffs section)
+- Ship something working, not something perfect
+
+### What I Learned
+
+1. **Idempotency is harder than it looks**: Caching responses sounds simple until you handle edge cases like partial failures and race conditions.
+
+2. **Transactions save lives**: Wrapping related operations in a single transaction prevented so many potential bugs.
+
+3. **Redis is incredibly versatile**: Using it for both idempotency and rate limiting showed me why it's a staple in production systems.
+
+4. **Load testing reveals truth**: My code "worked" until I threw 100 concurrent requests at it. That's when the real debugging started.
+
+### Why This Matters
+
+Every subscription service, from Netflix to Spotify to your local gym app, faces these exact challenges. By building this, I now understand:
+- Why payment APIs require idempotency keys
+- How companies prevent double-charging customers
+- What happens behind the scenes when you click "Subscribe"
+
+This isn't just a portfolio project. It's proof that I can build systems that handle real money and real consequences.
+
+---
+
 ## Key Achievements
 
 | Metric | Target | Achieved |
